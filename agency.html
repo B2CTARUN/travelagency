@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoswamiYatra - Your Travel Partner</title>
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #fff;
+      color: #222;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fdfdfd;
+      padding: 0 20px;
+      height: 60px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    .nav-links {
+      display: flex;
+      gap: 10px;
+    }
+    nav a {
+      color: #333;
+      padding: 14px 18px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #ff7e5f;
+    }
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .login-btn, .signup-btn {
+      background: #ff7e5f;
+      color: #fff !important;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .signup-btn {
+      background: #007bff;
+    }
+    .login-btn:hover {
+      background: #e95c41;
+    }
+    .signup-btn:hover {
+      background: #0056b3;
+    }
+
+    /* Header */
+    header {
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 120px 20px 60px;
+      margin-top: 60px;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+    }
+    header h1, header p {
+      position: relative;
+      z-index: 1;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+      letter-spacing: 2px;
+    }
+    header p {
+      font-size: 1.2em;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      background: url("https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/bcd00d121904695.60cf59b0da956.jpg") no-repeat center/cover;
+      color: white;
+      text-align: center;
+      padding: 120px 20px;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+    }
+    .hero h2, .hero p, .hero button {
+      position: relative;
+      z-index: 1;
+    }
+    .hero h2 {
+      font-size: 3em;
+      margin-bottom: 15px;
+    }
+    .hero p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+    .hero button {
+      background: #ffd700;
+      border: none;
+      padding: 14px 30px;
+      font-size: 1em;
+      font-weight: bold;
+      color: #222;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .hero button:hover {
+      background: #ffc107;
+      transform: scale(1.05);
+    }
+
+    /* Packages */
+    .packages {
+      padding: 60px 20px;
+      text-align: center;
+      background: #f7f9fb;
+      color: #222;
+    }
+    .packages h2 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      color: #ff7e5f;
+    }
+    .package-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 25px;
+    }
+    .package {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    .package:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+    .package img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .package h3 {
+      margin: 15px;
+      font-size: 1.4em;
+      color: #333;
+    }
+    .package p {
+      padding: 0 15px 15px;
+      font-size: 1em;
+      line-height: 1.4em;
+      color: #555;
+    }
+    .package button {
+      margin: 15px;
+      padding: 10px 18px;
+      border: none;
+      background: linear-gradient(45deg, #ff7e5f, #feb47b);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .package button:hover {
+      background: linear-gradient(45deg, #e95c41, #ff7e5f);
+    }
+
+    /* Contact */
+    .contact {
+      position: relative;
+      padding: 60px 20px;
+      background: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470") no-repeat center/cover;
+      text-align: center;
+      color: white;
+    }
+    .contact::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+    }
+    .contact h2, .contact form {
+      position: relative;
+      z-index: 1;
+    }
+    form {
+      max-width: 500px;
+      margin: auto;
+      text-align: left;
+      background: rgba(255,255,255,0.95);
+      padding: 20px;
+      border-radius: 12px;
+      color: #222;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    button[type="submit"] {
+      background: #ff7e5f;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: 0.3s;
+    }
+    button[type="submit"]:hover {
+      background: #e95c41;
+    }
+
+    /* Footer */
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 18px;
+    }
+
+    /* Chatbot */
+    .chatbot-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff7e5f;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      transition: 0.3s;
+      z-index: 1000;
+    }
+    .chatbot-btn:hover {
+      background: #e95c41;
+    }
+    .chatbox {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 300px;
+      height: 400px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 999;
+    }
+    .chatbox-header {
+      background: #ff7e5f;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .chatbox-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 0.9em;
+    }
+    .chatbox-input {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+    .chatbox-input input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+    }
+    .chatbox-input button {
+      background: #ff7e5f;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#packages">Packages</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="auth-buttons">
+      <a href="#login" class="login-btn">Login</a>
+      <a href="#signup" class="signup-btn">Signup</a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <h1>GoswamiYatra</h1>
+    <p>Your Gateway to Memorable Journeys ✈️🌍</p>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <h2>Discover Your Next Adventure</h2>
+    <p>Exotic Locations • Comfortable Trips • Affordable Packages</p>
+    <button onclick="scrollToPackages()">View Packages</button>
+  </section>
+
+  <!-- Packages -->
+  <section class="packages" id="packages">
+    <h2>Top Travel Packages</h2>
+    <div class="package-container">
+      <div class="package">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Taj-Mahal.jpg" alt="Agra Taj Mahal">
+        <h3>Agra Tour</h3>
+        <p>2 Nights & 3 Days – Explore the Taj Mahal, Agra Fort, and Fatehpur Sikri.</p>
+        <button onclick="alert('Agra Tour booked!')">Book Now</button>
+      </div>
+      <div class="package">
+        <img src="https://www.tripsavvy.com/thmb/_90BESYBgRYI93AkA-agK26tj6o=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-154908686-5b9e3f52c9e77c0057fb536f.jpg" alt="Jaipur">
+        <h3>Jaipur Tour</h3>
+        <p>3 Nights & 4 Days – Visit Amber Fort, City Palace, Hawa Mahal, and more.</p>
+        <button onclick="alert('Jaipur Tour booked!')">Book Now</button>
+      </div>
+      <div class="package">
+        <img src="https://media.istockphoto.com/id/1157048446/photo/aerial-shot-of-the-beach-from-above-showing-sea-beach-mountain-and-a-coconut-plantation-goa.jpg?s=612x612&w=0&k=20&c=BE0ZCnKZj8xi9Zgx5meO77k-o8v8EPT9TwlsPvY3TMc=" alt="Goa">
+        <h3>Goa Tour</h3>
+        <p>4 Nights & 5 Days – Relax at beaches, enjoy nightlife, and water sports.</p>
+        <button onclick="alert('Goa Tour booked!')">Book Now</button>
+      </div>
+      <div class="package">
+        <img src="https://lp-cms-production.imgix.net/2024-08/shutterstock2044878389.jpg?auto=format,compress&q=72&w=1440&h=810&fit=crop" alt="Kerala">
+        <h3>Kerala Tour</h3>
+        <p>5 Nights & 6 Days – Houseboats, backwaters, tea gardens, and Ayurveda.</p>
+        <button onclick="alert('Kerala Tour booked!')">Book Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <form onsubmit="return submitForm(event)">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 GoswamiYatra.com | Designed with ❤️ by Tarun :)</p>
+  </footer>
+
+  <!-- Chatbot -->
+  <button class="chatbot-btn" onclick="toggleChat()">💬</button>
+  <div class="chatbox" id="chatbox">
+    <div class="chatbox-header">GoswamiYatra Bot</div>
+    <div class="chatbox-messages" id="chatMessages">
+      <p><b>Bot:</b> Hi! How can I help you today?</p>
+    </div>
+    <div class="chatbox-input">
+      <input type="text" id="chatInput" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function scrollToPackages() {
+      document.getElementById("packages").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+      alert("Thank you for contacting GoswamiYatra! We will get back to you soon.");
+      return false;
+    }
+
+    function toggleChat() {
+      const chatbox = document.getElementById("chatbox");
+      chatbox.style.display = chatbox.style.display === "flex" ? "none" : "flex";
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("chatInput");
+      const messages = document.getElementById("chatMessages");
+      if(input.value.trim() !== "") {
+        let userMsg = document.createElement("p");
+        userMsg.innerHTML = "<b>You:</b> " + input.value;
+        messages.appendChild(userMsg);
+
+        // Fake bot reply
+        let botMsg = document.createElement("p");
+        botMsg.innerHTML = "<b>Bot:</b> Thanks for your query! Our team will reach out shortly.";
+        messages.appendChild(botMsg);
+
+        messages.scrollTop = messages.scrollHeight;
+        input.value = "";
+      }
+    }
+  </script>
+</body>
+</html>
